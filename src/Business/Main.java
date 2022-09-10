@@ -11,6 +11,9 @@ public class Main {
     public Main() {
         this.listaVehiculo = new ArrayList<Vehiculo>();
         this.listaPropietario = new ArrayList<Persona>();
+        this.guardarPropietario("12345", "Harry", "Potter", "harryp@magic.com");
+        this.guardarPropietario("67890", "Hermione", "Granger", "hermaioneg@magic.com");
+        this.guardarPropietario("55555", "Ron", "Weasley", "ronweasley@magic.com");
     }
     
     
@@ -121,7 +124,7 @@ public class Main {
         return c;
     }
     
-    public Vehiculo buscarVehiculo(String placa){
+    private Vehiculo buscarVehiculo(String placa){
         Vehiculo v=null;
         
         for(int i=0;i<this.listaVehiculo.size();i++){
@@ -132,6 +135,16 @@ public class Main {
         return v;
     }
     
-    
+    public String consultarVehiculo(String placa){
+        String c="Vehiculo no existe";
+        
+        Vehiculo v=this.buscarVehiculo(placa);
+        
+        if(v!=null){
+            c=v.getPlaca()+"-"+v.getModelo()+"-"+v.getMarca()+"-"+v.getPropietario();
+        }
+        
+        return c;
+    }
     
 }

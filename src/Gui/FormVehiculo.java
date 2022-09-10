@@ -18,13 +18,33 @@ Main m;
      */
     public FormVehiculo(Main m) {
         this.m=m;
+       
         initComponents();
+         this.cargarPropietario();
     }
 
     
     public FormVehiculo() {
         initComponents();
     }
+    
+    private void cargarPropietario(){
+        String [] cadena=this.m.listarPropietario().split("-");
+       
+        for(int i=0;i<cadena.length;i++){
+           this.cmbPropietario.addItem(cadena[i]);
+        }
+    }
+    
+    private void limpliar(){
+        this.txtPlaca.setText("");
+        this.txtMarca.setText("");
+        this.txtModelo.setText("");
+        this.cmbPropietario.setSelectedIndex(0);
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,23 +68,52 @@ Main m;
         btRegistrarPropietario = new javax.swing.JButton();
         btSalir = new javax.swing.JButton();
         cmbPropietario = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Marca:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 175, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Dueño:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 215, -1, -1));
 
         btConsultar.setText("Consultar");
+        btConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConsultarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 270, -1, -1));
+        getContentPane().add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 225, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 225, -1));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 225, -1));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Placa:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 95, -1, -1));
 
-        jLabel2.setText("Mdelo:");
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Modelo:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 135, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Administrar Vehiculos");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 25, -1, -1));
 
         btModificar.setText("Modificar");
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 270, -1, -1));
 
         btRegistrar.setText("Registrar");
         btRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +121,7 @@ Main m;
                 btRegistrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 270, -1, -1));
 
         btRegistrarPropietario.setText("+");
         btRegistrarPropietario.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +129,7 @@ Main m;
                 btRegistrarPropietarioActionPerformed(evt);
             }
         });
+        getContentPane().add(btRegistrarPropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 212, 24, -1));
 
         btSalir.setText("Salir");
         btSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -86,86 +137,29 @@ Main m;
                 btSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(btSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 270, -1, -1));
 
         cmbPropietario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPropietarioActionPerformed(evt);
             }
         });
+        getContentPane().add(cmbPropietario, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 212, 225, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(83, 83, 83))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btRegistrarPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btRegistrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btModificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btConsultar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btSalir)))
-                .addContainerGap(23, Short.MAX_VALUE))
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel3)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(btRegistrarPropietario)
-                    .addComponent(cmbPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btConsultar)
-                    .addComponent(btModificar)
-                    .addComponent(btRegistrar)
-                    .addComponent(btSalir))
-                .addContainerGap(38, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,13 +188,14 @@ Main m;
         String placa=this.txtPlaca.getText();
         String marca=this.txtMarca.getText();
         String modelo=this.txtModelo.getText();
-        String propietario=(String) this.cmbPropietario.getSelectedItem();
+        String [] propietario=((String) this.cmbPropietario.getSelectedItem()).split(" ");
         
-        if("".equals(placa)||"".equals(marca)||"".equals(modelo)||"".equals(propietario)){
+        if("".equals(placa)||"".equals(marca)||"".equals(modelo)){
              JOptionPane.showMessageDialog(null, "Faltan datos por ingresar");
         }else{
-           String res= this.m.guardarVehiculo(placa, modelo, marca, propietario);
+           String res= this.m.guardarVehiculo(placa, modelo, marca, propietario[0]);
            JOptionPane.showMessageDialog(null, res);
+           this.limpliar();
         }
         
     }//GEN-LAST:event_btRegistrarActionPerformed
@@ -208,6 +203,51 @@ Main m;
     private void cmbPropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPropietarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPropietarioActionPerformed
+
+    private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
+        // TODO add your handling code here:
+        String placa=this.txtPlaca.getText();
+        if("".equals(placa)){
+           JOptionPane.showMessageDialog(null, "Ingrese la placa del vehiculo"); 
+        }else{
+            String [] res=this.m.consultarVehiculo(placa).split("-");
+            if("Vehiculo no existe".equals(res[0])){
+                 JOptionPane.showMessageDialog(null, res[0]); 
+            }else{
+                this.txtModelo.setText(res[1]);
+                this.txtMarca.setText(res[2]);
+                
+                for(int i=0;i<this.cmbPropietario.getItemCount();i++){
+                    String [] seleccion=this.cmbPropietario.getItemAt(i).split(" ");
+                    if(seleccion[0].equals(res[3])){
+                        this.cmbPropietario.setSelectedIndex(i);
+                    }
+                }
+               
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_btConsultarActionPerformed
+
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+        // TODO add your handling code here:
+        
+        String placa=this.txtPlaca.getText();
+        String marca=this.txtMarca.getText();
+        String modelo=this.txtModelo.getText();
+        String [] propietario=((String) this.cmbPropietario.getSelectedItem()).split(" ");
+        
+        if("".equals(placa)||"".equals(marca)||"".equals(modelo)){
+             JOptionPane.showMessageDialog(null, "Faltan datos por ingresar");
+        }else{
+           String res= this.m.modificarVehiculo(placa, modelo, marca, propietario[0]);
+           JOptionPane.showMessageDialog(null, res);
+           this.limpliar();
+        }
+
+    }//GEN-LAST:event_btModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +279,7 @@ Main m;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new FormVehiculo().setVisible(true);
             }
         });
@@ -256,6 +297,7 @@ Main m;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtPlaca;
